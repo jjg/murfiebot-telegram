@@ -9,7 +9,10 @@ def handle(msg):
 	content_type, chat_type, chat_id = telepot.glance(msg)
 	print content_type, chat_type, chat_id
 
-	query_args = {'q':msg['text']}
+	query_args = {'q':msg['text'].lower().replace('@murfiebot', '')}
+
+	# debug
+	print query_args
 
 	MURFIE_API_CONNECTION = httplib.HTTPSConnection('api.murfie.com')
 	MURFIE_API_CONNECTION.request('GET', '/albums?%s' % urllib.urlencode(query_args))
